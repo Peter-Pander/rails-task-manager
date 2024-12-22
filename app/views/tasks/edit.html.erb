@@ -1,0 +1,28 @@
+<%# app/views/tasks/edit.html.erb %>
+
+<div class="ms-3" style="max-width: 600px;"> <!-- Custom width for form container -->
+  <h1>Edit Task</h1>
+
+  <%= form_with model: @task, url: task_path(@task), local: true do |f| %>
+    <div>
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control' %> <!-- Input field for title -->
+    </div>
+
+    <div>
+      <%= f.label :details %>
+      <%= f.text_area :details, class: 'form-control' %> <!-- Input field for details -->
+    </div>
+
+    <div class="my-3">
+      <%= f.label :completed %>
+      <%= f.check_box :completed %> <!-- Checkbox for completed -->
+    </div>
+
+    <div>
+      <%= f.submit "Update Task", class: 'btn btn-primary' %> <!-- Submit button -->
+    </div>
+  <% end %>
+
+  <%= link_to 'Back to My tasks', tasks_path, class: 'btn btn-secondary mt-3' %> <!-- Back link -->
+</div>

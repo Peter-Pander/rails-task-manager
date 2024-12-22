@@ -1,0 +1,32 @@
+<%# app/views/tasks/index.html.erb %>
+
+<%# app/views/tasks/index.html.erb %>
+
+<h1 class="ms-3">My tasks</h1>
+
+<ul class="list-unstyled ms-3">
+  <% @tasks.each do |task| %>
+    <li class="d-flex align-items-center">
+      <!-- Checkbox that toggles the completion status of the task -->
+      <%= form_with model: task, url: task_path(task), method: :patch, local: true do |form| %>
+        <%= form.check_box :completed, class: 'me-2', checked: task.completed %>
+        <%= form.submit 'Update', class: 'sr-only' %>
+      <% end %>
+
+      <!-- Task Title -->
+      <strong><%= link_to task.title, task_path(task) %></strong>
+
+      <!-- Edit Button -->
+      <!-- btn-sm added for smaller size -->
+      <!-- p-1 for smaller padding -->
+      <!-- ms-3 adds margin to the left of the Edit button -->
+      <%= link_to 'Edit', edit_task_path(task), class: 'ms-3' %>
+
+      <%= link_to task_path(task.id), class: 'ms-3', data: {turbo_method: :delete, turbo_confirm: "Delete #{task.title}?"} do %>
+        <i class="fa-regular fa-trash-can"></i>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'New Task', new_task_path, class: 'btn btn-primary mt-3 ms-3' %> <!-- New task button -->
